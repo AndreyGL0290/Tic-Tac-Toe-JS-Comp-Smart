@@ -15,10 +15,12 @@ move();
 // Ход компьютера
 function computerTurn() {
     // Выбираем в какую клеточку ходить, если есть свободные
-    if(!standoff()){
-        while (win_strike.indexOf(ceil) == -1) {
-            ceil = Math.random().toFixed(1) * 10;
-        }
+    if (win_strike.indexOf(5) != -1) {
+        ceil = 5;
+    }
+    else if (!standoff()) {
+        ceil = logic(player_sym);
+        ceil = logic(comp_sym);
     }
 
     canvas = document.getElementById(ceil);
@@ -59,7 +61,7 @@ function computerTurn() {
     }
     win_strike[win_strike.indexOf(ceil)] = comp_sym;
     context.stroke();
-    if (check(comp_sym)){
+    if (check(comp_sym)) {
         document.getElementById('win').textContent = "Computer wins";
         document.getElementById('restart').textContent = "Restart";
         return;
@@ -69,8 +71,8 @@ function computerTurn() {
 
 // Ход человека
 function playerTurn(number) {
-    if (!check(player_sym)&&
-        !check(comp_sym)&&
+    if (!check(player_sym) &&
+        !check(comp_sym) &&
         // Проверка на занятость клеточки
         win_strike.indexOf(number) != -1) {
         canvas = document.getElementById(number);
@@ -112,7 +114,7 @@ function playerTurn(number) {
         win_strike[win_strike.indexOf(number)] = player_sym;
         context.stroke();
         console.log(win_strike);
-        if (check(player_sym)){
+        if (check(player_sym)) {
             document.getElementById('win').textContent = "You wins";
             document.getElementById('restart').textContent = "Restart";
             return;
@@ -132,16 +134,16 @@ function correction() {
 }
 
 // Функция отвечающая за то, кто будет делать первый ход
-function move(){
+function move() {
     if (Math.round(Math.random()) == 1) {
-         comp_sym = 'X';
-         player_sym = 'O';
-         computerTurn();
-    }else{
+        comp_sym = 'X';
+        player_sym = 'O';
+        computerTurn();
+    } else {
         comp_sym = 'O';
         player_sym = 'X';
     }
- }
+}
 
 // Функция проверки на победу того или иного игрока. Возвращает булиновское значение
 function check(symbol) {
@@ -171,9 +173,9 @@ function check(symbol) {
 }
 
 // Определяет ничью
-function standoff(){
-    for (let i = 1; i<10; i++){
-        if (win_strike.indexOf(i) != -1){
+function standoff() {
+    for (let i = 1; i < 10; i++) {
+        if (win_strike.indexOf(i) != -1) {
             return false;
         }
     }
@@ -183,8 +185,8 @@ function standoff(){
 }
 
 // Отвечает за переигровку
-function restart(){
-    for (let i = 1; i<10; i++){
+function restart() {
+    for (let i = 1; i < 10; i++) {
         canvas = document.getElementById(i);
         context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -192,5 +194,61 @@ function restart(){
     document.getElementById('restart').textContent = '';
     document.getElementById('win').textContent = '';
     win_strike = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    move(); 
+    move();
+}
+
+// В этой функции компьютер находит лучший вариант для хода
+function logic(symbol) {
+    // Горизонтальные возможности
+    for (let i = 0; i < 7; i += 3) {
+        if (win_strike[i] == symbol && win_strike[i + 1] == symbol && win_strike.indexOf(i + 3) != -1) {
+            return i + 3;
+        }
+        else if (win_strike[i] == symbol && win_strike.indexOf(i + 2) != -1 && win_strike[i + 2] == symbol) {
+            return i + 2;
+        }
+        else if (win_strike.indexOf(i + 1) != -1 && win_strike[i + 1] == symbol && win_strike[i + 2] == symbol) {
+            return i + 1;
+        }
+    }
+    // Вертикальные возможности
+    for (let i = 0; i < 3; i++) {
+        if (win_strike[i] == symbol && win_strike[i + 3] == symbol && win_strike.indexOf(i + 7) != -1) {
+            return i + 7;
+        }
+        else if (win_strike[i] == symbol && win_strike.indexOf(i + 4) != -1 && win_strike[i + 6] == symbol) {
+            return i + 4;
+        }
+        else if (win_strike.indexOf(i + 1) != -1 && win_strike[i + 3] == symbol && win_strike[i + 6] == symbol) {
+            return i + 1;
+        }
+    }
+    // Диагональные возможности (слева направо)
+    for (let i = 0; i < 1; i++) {
+        if (win_strike[i] == symbol && win_strike[i + 4] == symbol && win_strike.indexOf(i + 9) != -1) {
+            return i + 9;
+        }
+        else if (win_strike[i] == symbol && win_strike.indexOf(i + 5) != -1 && win_strike[i + 8] == symbol) {
+            return i + 5;
+        }
+        else if (win_strike.indexOf(i + 1) != -1 && win_strike[i + 4] == symbol && win_strike[i + 8] == symbol) {
+            return i + 1;
+        }
+    }
+    // Диагональные возможности (справа налево)
+    for (let i = 2; i < 3; i++) {
+        if (win_strike[i] == symbol && win_strike[i + 2] == symbol && win_strike.indexOf(i + 5) != -1) {
+            return i + 5;
+        }
+        else if (win_strike[i] == symbol && win_strike.indexOf(i + 3) != -1 && win_strike[i + 4] == symbol) {
+            return i + 3;
+        }
+        else if (win_strike.indexOf(i + 1) != -1 && win_strike[i + 2] == symbol && win_strike[i + 4] == symbol) {
+            return i + 1;
+        }
+    }
+    while (win_strike.indexOf(ceil) == -1) {
+        ceil = Math.random().toFixed(1) * 10;
+    }
+    return ceil;
 }
