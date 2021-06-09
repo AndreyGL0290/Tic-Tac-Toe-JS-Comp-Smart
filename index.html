@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic-Tac-Toe-Comp-Smart</title>
+</head>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <h2>Click the field</h2>
+    <div>
+        <div style="display: inline-block;">
+            <div class="first-three">
+                <canvas width="200" height="200" id="1" onmousedown="playerTurn(1)"></canvas>
+            </div>
+            <div class="first-three">
+                <canvas width="200" height="200" id="4" onmousedown="playerTurn(4)"></canvas>
+            </div>
+            <div class="first-three" style="border-bottom:0px;">
+                <canvas width="200" height="200" id="7" onmousedown="playerTurn(7)"></canvas>
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <div class="second-three">
+                <canvas width="200" height="200" id="2" onmousedown="playerTurn(2)"></canvas>
+            </div>
+            <div class="second-three">
+                <canvas width="200" height="200" id="5" onmousedown="playerTurn(5)"></canvas>
+            </div>
+            <div class="second-three" style="border-bottom:0px black solid;">
+                <canvas width="200" height="200" id="8" onmousedown="playerTurn(8)"></canvas>
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <div class="third-three">
+                <canvas width="200" height="200" id="3" onmousedown="playerTurn(3)"></canvas>
+            </div>
+            <div class="third-three">
+                <canvas width="200" height="200" id="6" onmousedown="playerTurn(6)"></canvas>
+            </div>
+            <div class="third-three" style="border-bottom:0px;">
+                <canvas width="200" height="200" id="9" onmousedown="playerTurn(9)"></canvas>
+            </div>
+        </div>
+    </div>
+    <h2 id="win"></h2>
+    <a id="restart" href="javascript: restart();"></a>
+    <script src="script.js"></script>
+</body>
+</html>

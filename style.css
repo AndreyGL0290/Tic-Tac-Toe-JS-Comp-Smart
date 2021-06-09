@@ -1,0 +1,39 @@
+body{
+    -moz-user-select:none;
+	-khtml-user-select:none;
+	user-select:none;
+    overflow:hidden;
+    text-align:center;
+    background-color:#bbf1fa;
+}
+
+h1, h2, a{
+    color:#663f3f; 
+}
+
+a{
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+}
+
+canvas{
+    width:20vw;
+    height:20vh;
+}
+
+.first-three{
+    border-right:2px #663f3f solid;
+    border-bottom:2px #663f3f solid;
+}
+
+.second-three{
+    border-left:2px #663f3f solid;
+    border-right:2px #663f3f solid;
+    border-bottom:2px #663f3f solid;
+}
+
+.third-three{
+    border-left:2px #663f3f solid;
+    border-bottom:2px #663f3f solid;
+}
