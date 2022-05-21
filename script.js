@@ -115,7 +115,7 @@ function playerTurn(number) {
         context.stroke();
         console.log(win_strike);
         if (check(player_sym)) {
-            document.getElementById('win').textContent = "You wins";
+            document.getElementById('win').textContent = "You win";
             document.getElementById('restart').textContent = "Restart";
             return;
         }
